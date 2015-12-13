@@ -2,6 +2,7 @@ package ApiRefit;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.IOException;
 import java.util.List;
 
 import retrofit.Call;
@@ -31,7 +32,7 @@ public class ServiceGenerator {
     }
 
 
-    public static class Contributor {
+    public class Contributor  {
         public final String login;
         public final int contributions;
 
