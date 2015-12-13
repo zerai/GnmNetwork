@@ -49,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
         // Fetch and print a list of the contributors to this library.
         Call<List<ServiceGenerator.Contributor>> call =
                 client.contributors("sylius", "sylius");
-        Log.d(TAG, "MainActivity -- Set client.contributors");
+        Log.d(TAG, "MainActivity -- Set client.contributors "+"+second string");
 
 
         List<ServiceGenerator.Contributor> contributors;
-        contributors = call.execute().body();
+        //contributors = call.execute().body();
 /*        try {
             contributors = call.execute().body();
         } catch (IOException e) {
