@@ -9,10 +9,22 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import android.util.Log;
+
+import java.io.IOException;
+import java.util.List;
+
+import ApiRefit.ServiceGenerator;
+
+import retrofit.Call;
+
 public class MainActivity extends AppCompatActivity {
+
+    private final static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -26,7 +38,41 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
+
+
+
+
+        // Create a very simple REST adapter which points the GitHub API endpoint.
+        ServiceGenerator.GitHubClient client = ServiceGenerator.createService(ServiceGenerator.GitHubClient.class);
+        Log.d(TAG, "MainActivity -- Create ApiClient");
+
+        // Fetch and print a list of the contributors to this library.
+        Call<List<ServiceGenerator.Contributor>> call =
+                client.contributors("sylius", "sylius");
+        Log.d(TAG, "MainActivity -- Set client.contributors");
+
+
+        List<ServiceGenerator.Contributor> contributors;
+        contributors = call.execute().body();
+/*        try {
+            contributors = call.execute().body();
+        } catch (IOException e) {
+            //e.printStackTrace();
+        }*/
+
+        /*        try {
+                    List<ServiceGenerator.Contributor> contributors = call.execute().body();
+                } catch (IOException e) {
+                    // handle errors
+                    Log.d( TAG, "MainActivity -- " );
+                }*/
+
+/*                for (ServiceGenerator.Contributor contributor : contributors) {
+                    System.out.println(
+                            contributor.login + " (" + contributor.contributions + ")");
+                }*/
+        }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
